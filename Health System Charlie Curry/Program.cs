@@ -126,6 +126,22 @@ namespace Health_System_Charlie_Curry
 
             }
 
+            void RegenerateShield(int hp)
+            {
+                if (hp < 0)
+                {
+                    Console.WriteLine("Error: Player Cannot Regenerate " + hp + " Shield");
+                }
+                else if (shield + hp > 100)
+                {
+                    shield = maxShield;
+                }
+                else
+                {
+                    shield += hp;
+                }
+            }
+
             void AddScore(float pointsEarned)
             {
                 score += pointsEarned * scoreMultiplier;
@@ -137,7 +153,7 @@ namespace Health_System_Charlie_Curry
                 Console.WriteLine("----------");
 
                 Console.WriteLine(realName + " AKA " + gamerTag);
-                Console.WriteLine("Health: " + health + " | " + "Shield: " + shield);
+                Console.WriteLine("Health: " + health + "%" +" | " + "Shield: " + shield + "%");
                 Console.WriteLine("Lives: " + lives);
                 Console.WriteLine(HealthStatus(health));
                 Console.WriteLine("Score: " + score + " | " + "Score Multiplier: " + scoreMultiplier);
@@ -221,6 +237,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Finds a Health Pack!");
             Console.WriteLine("Player Gains " + healthPack + " Health");
             Heal(healthPack);
+            RegenerateShield(healthPack);
 
             Console.WriteLine();
 
