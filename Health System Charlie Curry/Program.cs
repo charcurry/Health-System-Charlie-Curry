@@ -31,8 +31,8 @@ namespace Health_System_Charlie_Curry
             int healthPack = 30;
             string title = "Super Awesome Adventure Video Game";
             float score;
-            string realName;
-            string gamerTag;
+            //string realName;
+            //string gamerTag;
             int health;
             int maxHealth = 100;
             int lives;
@@ -40,13 +40,15 @@ namespace Health_System_Charlie_Curry
             float scoreMultiplier;
             int shield;
             int maxShield = 100;
+            int xp = 0;
+            int level = 1;
 
             void ResetGame()
             {
-                Console.WriteLine("Enter Your Name:");
-                realName = Console.ReadLine().Trim();
-                Console.WriteLine("Enter Your GamerTag:");
-                gamerTag = Console.ReadLine().Trim();
+                //Console.WriteLine("Enter Your Name:");
+                //realName = Console.ReadLine().Trim();
+                //Console.WriteLine("Enter Your GamerTag:");
+                //gamerTag = Console.ReadLine().Trim();
                 health = maxHealth;
                 shield = maxShield;
                 score = 0f;
@@ -152,7 +154,7 @@ namespace Health_System_Charlie_Curry
                 Console.WriteLine(title);
                 Console.WriteLine("----------");
 
-                Console.WriteLine(realName + " AKA " + gamerTag);
+                //Console.WriteLine(realName + " AKA " + gamerTag);
                 Console.WriteLine("Health: " + health + "%" +" | " + "Shield: " + shield + "%");
                 Console.WriteLine("Lives: " + lives);
                 Console.WriteLine(HealthStatus(health));
