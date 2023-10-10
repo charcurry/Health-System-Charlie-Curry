@@ -48,7 +48,19 @@ namespace Health_System_Charlie_Curry
 
             void IncreaseXP(int experience)
             {
-                if (xp + experience > xpThreshhold)
+                if (experience + xp > xpThreshhold + 100 && experience + xp < xpThreshhold + 200)
+                {
+                    level += 2;
+                    xp += experience;
+                    xpThreshhold += 200;
+                }
+                else if (xp + experience > xpThreshhold && xp + experience < xpThreshhold + 100)
+                {
+                    level++;
+                    xp += experience;
+                    xpThreshhold += 100;
+                }
+                else if (experience + xp > xpThreshhold)
                 {
                     level++;
                     xp += experience;
@@ -194,6 +206,7 @@ namespace Health_System_Charlie_Curry
             AddScore(smallEnemyPoints);
             TakeDamage(smallEnemyDamage);
             scoreMultiplier += smallEnemyScoreMultiplier;
+            IncreaseXP(300);
 
             Console.WriteLine();
 
