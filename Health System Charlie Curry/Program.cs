@@ -11,6 +11,7 @@ namespace Health_System_Charlie_Curry
     {
         static void Main(string[] args)
         {
+            #region Variables
             float smallEnemyScoreMultiplier = 0.1f;
             float mediumEnemyScoreMultiplier = 0.2f;
             float largeEnemyScoreMultiplier = 0.3f;
@@ -40,8 +41,24 @@ namespace Health_System_Charlie_Curry
             float scoreMultiplier;
             int shield;
             int maxShield = 100;
-            int xp = 0;
-            int level = 1;
+            int xp;
+            int level;
+            int xpThreshhold;
+            #endregion
+
+            void IncreaseXP(int experience)
+            {
+                if (xp + experience > xpThreshhold)
+                {
+                    level++;
+                    xp += experience;
+                    xpThreshhold += 100;
+                }
+                else
+                {
+                    xp += experience;
+                }
+            }
 
             void ResetGame()
             {
@@ -53,6 +70,9 @@ namespace Health_System_Charlie_Curry
                 shield = maxShield;
                 score = 0f;
                 lives = 3;
+                xp = 0;
+                level = 1;
+                xpThreshhold = 100;
                 scoreMultiplier = 0f;
                 Console.WriteLine("New Game");
             }
@@ -155,9 +175,10 @@ namespace Health_System_Charlie_Curry
                 Console.WriteLine("----------");
 
                 //Console.WriteLine(realName + " AKA " + gamerTag);
-                Console.WriteLine("Health: " + health + "%" +" | " + "Shield: " + shield + "%");
+                Console.WriteLine("Health: " + health + "%" + " | " + "Shield: " + shield + "%");
                 Console.WriteLine("Lives: " + lives);
                 Console.WriteLine(HealthStatus(health));
+                Console.WriteLine("XP: " + xp + " | " + "Level: " + level + " | " + "XP to Next Level: " +(xpThreshhold - xp));
                 Console.WriteLine("Score: " + score + " | " + "Score Multiplier: " + scoreMultiplier);
 
                 Console.WriteLine();
