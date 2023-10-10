@@ -178,7 +178,7 @@ namespace Health_System_Charlie_Curry
                 Console.WriteLine("Health: " + health + "%" + " | " + "Shield: " + shield + "%");
                 Console.WriteLine("Lives: " + lives);
                 Console.WriteLine(HealthStatus(health));
-                Console.WriteLine("XP: " + xp + " | " + "Level: " + level + " | " + "XP to Next Level: " +(xpThreshhold - xp));
+                Console.WriteLine("XP: " + xp + " | " + "Level: " + level + " | " + "XP to Next Level: " + (xpThreshhold - xp));
                 Console.WriteLine("Score: " + score + " | " + "Score Multiplier: " + scoreMultiplier);
 
                 Console.WriteLine();
