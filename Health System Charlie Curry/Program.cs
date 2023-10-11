@@ -31,44 +31,74 @@ namespace Health_System_Charlie_Curry
             float finalBossPoints = 2000f;
             int healthPack = 30;
             string title = "Super Awesome Adventure Video Game";
-            float score;
+            float score = 0f;
             //string realName;
             //string gamerTag;
-            int health;
+            int health = 100;
             int maxHealth = 100;
-            int lives;
+            int lives = 3;
             int oneUp = 1;
-            float scoreMultiplier;
-            int shield;
+            float scoreMultiplier = 0f;
+            int shield = 100;
             int maxShield = 100;
-            int xp;
-            int level;
-            int xpThreshhold;
+            int xp = 0;
+            int level = 1;
+            int xpThreshhold = 100 * level;
             #endregion
 
             void IncreaseXP(int experience)
             {
-                if (experience + xp > xpThreshhold + 100 && experience + xp < xpThreshhold + 200)
+                if (experience > 100)
                 {
-                    level += 2;
-                    xp += experience;
-                    xpThreshhold += 200;
+                    if (experience % 100 == 0)
+                    {
+                        for (int i = experience / 100; i > 0; i--)
+                        {
+                            if (xp + 100 > 1000000)
+                            {
+                                xp = 1000000;
+                            }
+                            else
+                            {
+                                xp += 100;
+                            }
+                            if (xp >= xpThreshhold)
+                            {
+                                if (level < 1000)
+                                {
+                                    level++;
+                                    xpThreshhold += 100 * level;
+                                }
+                                else
+                                {
+                                    level = 1000;
+                                }
+                            }
+                        }   
+                    }
                 }
-                else if (xp + experience > xpThreshhold && xp + experience < xpThreshhold + 100)
+                else if (experience <= 100)
                 {
-                    level++;
-                    xp += experience;
-                    xpThreshhold += 100;
-                }
-                else if (experience + xp > xpThreshhold)
-                {
-                    level++;
-                    xp += experience;
-                    xpThreshhold += 100;
-                }
-                else
-                {
-                    xp += experience;
+                    if (xp + experience > 1000000)
+                    {
+                        xp = 1000000;
+                    }
+                    else
+                    {
+                        xp += experience;
+                    }
+                    if (xp >= xpThreshhold)
+                    {
+                        if (level < 1000)
+                        {
+                            level++;
+                            xpThreshhold += 100 * level;
+                        }
+                        else
+                        {
+                            level = 1000;
+                        }
+                    }
                 }
             }
 
@@ -114,19 +144,27 @@ namespace Health_System_Charlie_Curry
                 return null;
             }
 
+            void Revive()
+            {
+                health = maxHealth;
+                shield = maxShield;
+                lives--;
+                scoreMultiplier -= deathScoreMultiplier;
+            }
+
             void TakeDamage(int damage)
             {
                 if (damage < 0)
                 {
                     Console.WriteLine("Error: Player Cannot Take " + damage + " Damage");
                 }
-                else if (health - damage <= 0)
-                {
-                    health = maxHealth;
-                    shield = maxShield;
-                    lives--;
-                    scoreMultiplier -= deathScoreMultiplier;
-                }
+                //else if (health - damage <= 0)
+                //{
+                    //health = maxHealth;
+                    //shield = maxShield;
+                    //lives--;
+                    //scoreMultiplier -= deathScoreMultiplier;
+                //}
                 else if (shield - damage <= 0)
                 {
                     health -= (damage - shield);
@@ -206,7 +244,7 @@ namespace Health_System_Charlie_Curry
             AddScore(smallEnemyPoints);
             TakeDamage(smallEnemyDamage);
             scoreMultiplier += smallEnemyScoreMultiplier;
-            IncreaseXP(300);
+            IncreaseXP(1000000000);
 
             Console.WriteLine();
 
