@@ -45,9 +45,9 @@ namespace Health_System_Charlie_Curry
         static int xp = 0;
         static int level = 1;
         static int xpCost = 100 * level;
-        static int previousHealthChange;
-        static int previousShieldChange;
-        static int previousLivesChange;
+        //static int previousHealthChange;
+        //static int previousShieldChange;
+        //static int previousLivesChange;
         #endregion
 
         static void IncreaseXP(int experience)
@@ -86,9 +86,9 @@ namespace Health_System_Charlie_Curry
             xp = 0;
             level = 1;
             xpCost = 100 * level;
-            previousHealthChange = 0;
-            previousShieldChange = 0;
-            previousLivesChange = 0;
+            //previousHealthChange = 0;
+            //previousShieldChange = 0;
+            //previousLivesChange = 0;
             //scoreMultiplier = 0f;
             Console.WriteLine("New Game");
         }
@@ -120,9 +120,9 @@ namespace Health_System_Charlie_Curry
 
         static void Revive()
         {
-            previousHealthChange = 100;
-            previousShieldChange = 100;
-            previousLivesChange = -1;
+            //previousHealthChange = 100;
+            //previousShieldChange = 100;
+            //previousLivesChange = -1;
             health = maxHealth;
             shield = maxShield;
             lives--;
@@ -137,29 +137,29 @@ namespace Health_System_Charlie_Curry
             }
             else if (health - damage <= 0)
             {
-                previousHealthChange = - (health - damage);
+                //previousHealthChange = - (health - damage);
                 health = 0;
                 shield = 0;
             //scoreMultiplier -= deathScoreMultiplier;
             }
             else if (shield - damage <= 0)
             {
-                previousHealthChange = -(damage - shield);
-                previousShieldChange = -shield;
+                //previousHealthChange = -(damage - shield);
+                //previousShieldChange = -shield;
                 health -= (damage - shield);
                 shield = 0;
             }
             else if (shield > 0)
             {
-                previousShieldChange = -damage;
-                previousHealthChange = 0;
+                //previousShieldChange = -damage;
+                //previousHealthChange = 0;
                 shield -= damage;
 
             }
             else if (health > 0)
             {
-                previousHealthChange = -damage;
-                previousShieldChange = 0;
+                //previousHealthChange = -damage;
+                //previousShieldChange = 0;
                 health -= damage;
             }
 
@@ -173,12 +173,12 @@ namespace Health_System_Charlie_Curry
             }
             else if (health + hp > 100)
             {
-                previousHealthChange = +100 - (health + hp);
+                //previousHealthChange = +100 - (health + hp);
                 health = maxHealth;
             }
             else
             {
-                previousHealthChange = hp;
+                //previousHealthChange = hp;
                 health += hp;
             }
 
@@ -192,19 +192,19 @@ namespace Health_System_Charlie_Curry
             }
             else if (shield + hp > 100)
             {
-                previousShieldChange = +100 - (shield + hp);
+                //previousShieldChange = +100 - (shield + hp);
                 shield = maxShield;
             }
             else
             {
-                previousShieldChange = hp;
+                //previousShieldChange = hp;
                 shield += hp;
             }
         }
 
         static void OneUp()
         {
-            previousLivesChange = 1;
+            //previousLivesChange = 1;
             lives++;
         }
 
@@ -219,8 +219,8 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("----------");
 
             //Console.WriteLine(realName + " AKA " + gamerTag);
-            Console.WriteLine("Health: " + health + "% " + previousHealthChange + " | " + "Shield: " + shield + "% " + previousShieldChange);
-            Console.WriteLine("Lives: " + lives + " " + previousLivesChange);
+            Console.WriteLine("Health: " + health + "% " + " | " + "Shield: " + shield + "% ");
+            Console.WriteLine("Lives: " + lives);
             Console.WriteLine(HealthStatus(health));
             Console.WriteLine("XP: " + xp + " | " + "Level: " + level + " | " + "XP to Next Level: " + (xpCost - xp));
             //Console.WriteLine("Score: " + score + " | " + "Score Multiplier: " + scoreMultiplier);
