@@ -53,7 +53,18 @@ namespace Health_System_Charlie_Curry
         static void IncreaseXP(int experience)
         {
             xpCost = level * 100;
-            xp += experience;
+            //xp += experience;
+                for (int i = experience / 100; i > 0; i--)
+                {
+                    xp += 100;
+                    if (xp >= xpCost)
+                    {
+                         level++;
+                         xp -= xpCost;
+                         xpCost = 100 * level;
+                    }
+                }
+            xp += experience % 100;
             if (xp >= xpCost)
             {
                 level++;
@@ -232,7 +243,7 @@ namespace Health_System_Charlie_Curry
             //AddScore(smallEnemyPoints);
             TakeDamage(smallEnemyDamage);
             //scoreMultiplier += smallEnemyScoreMultiplier;
-            IncreaseXP(300);
+            IncreaseXP(365);
 
             Console.WriteLine();
 
@@ -241,7 +252,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Found Some Treasure!");
             //Console.WriteLine("Player Scores " + treasurePoints + " Points");
             //AddScore(treasurePoints);
-            IncreaseXP(100);
+            IncreaseXP(235);
             Console.WriteLine();
 
             ShowHUD();
