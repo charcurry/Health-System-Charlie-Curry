@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HealthSystem
 {
@@ -51,26 +52,33 @@ namespace HealthSystem
         //static int previousLivesChange;
         #endregion
 
-        static void IncreaseXP(int experience)
+        static void IncreaseXP(int exp)
         {
-            xpCost = level * 100;
-            //xp += experience;
-                for (int i = experience / 100; i > 0; i--)
+            if (exp < 0)
+            {
+                Console.WriteLine("Error: Player Cannot Gain " + exp + " XP");
+            }
+            else
+            {
+                xpCost = level * 100;
+                //xp += experience;
+                for (int i = exp / 100; i > 0; i--)
                 {
                     xp += 100;
                     if (xp >= xpCost)
                     {
-                         level++;
-                         xp -= xpCost;
-                         xpCost = 100 * level;
+                        level++;
+                        xp -= xpCost;
+                        xpCost = 100 * level;
                     }
                 }
-            xp += experience % 100;
-            if (xp >= xpCost)
-            {
-                level++;
-                xp -= xpCost;
-                xpCost = 100 * level;
+                xp += exp % 100;
+                if (xp >= xpCost)
+                {
+                    level++;
+                    xp -= xpCost;
+                    xpCost = 100 * level;
+                }
             }
         }
 
@@ -121,12 +129,19 @@ namespace HealthSystem
 
         static void Revive()
         {
+            if (lives > 0)
+            {
+                health = maxHealth;
+                shield = maxShield;
+                lives--;
+            }
+            else
+            {
+                ResetGame();
+            }
             //previousHealthChange = 100;
             //previousShieldChange = 100;
             //previousLivesChange = -1;
-            health = maxHealth;
-            shield = maxShield;
-            lives--;
             //scoreMultiplier -= deathScoreMultiplier;
         }
 
