@@ -7,7 +7,7 @@ using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Health_System_Charlie_Curry
+namespace HealthSystem
 {
     internal class Program
     {
@@ -31,6 +31,7 @@ namespace Health_System_Charlie_Curry
         //float bossPoints = 1000f;
         //float finalBossPoints = 2000f;
         static int healthPack = 30;
+        static int shieldPack = 30;
         static string title = "Super Awesome Adventure Video Game";
         //float score = 0f;
         //string realName;
@@ -135,12 +136,18 @@ namespace Health_System_Charlie_Curry
             {
                 Console.WriteLine("Error: Player Cannot Take " + damage + " Damage");
             }
-            else if (health - damage <= 0)
+            else if (health - damage <= 0 && shield == 0)
             {
                 //previousHealthChange = - (health - damage);
                 health = 0;
                 shield = 0;
-            //scoreMultiplier -= deathScoreMultiplier;
+                //scoreMultiplier -= deathScoreMultiplier;
+            }
+            else if (health + shield - damage <= 0)
+            {
+                //previousHealthChange = - (health - damage);
+                health = 0;
+                shield = 0;
             }
             else if (shield - damage <= 0)
             {
@@ -262,6 +269,7 @@ namespace Health_System_Charlie_Curry
             //Console.WriteLine("Player Scores " + bossPoints + " Points");
             //AddScore(bossPoints);
             TakeDamage(bossDamage);
+            IncreaseXP(347);
             //scoreMultiplier += bossScoreMultiplier;
 
             Console.WriteLine();
@@ -272,6 +280,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Loses " + largeEnemyDamage + " Health");
             Console.WriteLine("Player Loses a Life");
             TakeDamage(largeEnemyDamage);
+            IncreaseXP(450);
 
             Console.WriteLine();
 
@@ -281,6 +290,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Loses " + largeEnemyDamage + " Health");
             //Console.WriteLine("Player Scores " + largeEnemyPoints + " Points");
             TakeDamage(largeEnemyDamage);
+            IncreaseXP(543);
             //AddScore(largeEnemyPoints);
             //scoreMultiplier += largeEnemyScoreMultiplier;
 
@@ -300,6 +310,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Loses " + mediumEnemyDamage + " Health");
             //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
             TakeDamage(mediumEnemyDamage);
+            IncreaseXP(334);
             //AddScore(mediumEnemyPoints);
             //scoreMultiplier += mediumEnemyScoreMultiplier;
 
@@ -310,7 +321,71 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Finds a Health Pack!");
             Console.WriteLine("Player Gains " + healthPack + " Health");
             Heal(healthPack);
-            RegenerateShield(healthPack);
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player Defeats an Enemy!");
+            Console.WriteLine("Player Loses " + mediumEnemyDamage + " Health");
+            //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
+            TakeDamage(mediumEnemyDamage);
+            IncreaseXP(253);
+            //AddScore(mediumEnemyPoints);
+            //scoreMultiplier += mediumEnemyScoreMultiplier;
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player Defeats an Enemy!");
+            Console.WriteLine("Player Loses " + mediumEnemyDamage + " Health");
+            //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
+            TakeDamage(mediumEnemyDamage);
+            IncreaseXP(534);
+            //AddScore(mediumEnemyPoints);
+            //scoreMultiplier += mediumEnemyScoreMultiplier;
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player Finds a Shield Pack!");
+            Console.WriteLine("Player Gains " + shieldPack + " Health");
+            RegenerateShield(shieldPack);
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player Defeats an Enemy!");
+            Console.WriteLine("Player Loses " + mediumEnemyDamage + " Health");
+            //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
+            TakeDamage(mediumEnemyDamage);
+            IncreaseXP(231);
+            //AddScore(mediumEnemyPoints);
+            //scoreMultiplier += mediumEnemyScoreMultiplier;
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player Loses " + mediumEnemyDamage + " Health");
+            Console.WriteLine("Player is Defeated by an Enemy!");
+            //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
+            TakeDamage(mediumEnemyDamage);
+            //AddScore(mediumEnemyPoints);
+            //scoreMultiplier += mediumEnemyScoreMultiplier;
+
+            Console.WriteLine();
+
+            ShowHUD();
+
+            Console.WriteLine("Player is Revived and uses one of their Lives");
+            //Console.WriteLine("Player Scores " + mediumEnemyPoints + " Points");
+            Revive();
+            //AddScore(mediumEnemyPoints);
+            //scoreMultiplier += mediumEnemyScoreMultiplier;
 
             Console.WriteLine();
 
@@ -321,6 +396,7 @@ namespace Health_System_Charlie_Curry
             Console.WriteLine("Player Loses " + finalBossDamage + " Health");
             //Console.WriteLine("Player Scores " + finalBossPoints + " Points");
             TakeDamage(finalBossDamage);
+            IncreaseXP(1000);
             //AddScore(finalBossPoints);
             //scoreMultiplier += finalBossScoreMultiplier;
 
